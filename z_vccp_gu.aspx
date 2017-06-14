@@ -38,7 +38,6 @@
                 
                 $('#txtXdate1').mask('999/99/99');
                 $('#txtXdate2').mask('999/99/99');
-                
                 $('#txtXdate1').val(q_cdn(q_date(),1));
                 $('#txtXdate2').val(q_cdn(q_date(),1));
 	                
