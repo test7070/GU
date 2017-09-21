@@ -511,7 +511,7 @@
 				var t_where = '';
 				if (t_custno.length > 0) {
 					t_where = "noa+'_'+no3 not in (select isnull(quatno,'')+'_'+isnull(no3,'') from view_ordes" + r_accy + " where noa!='" + $('#txtNoa').val() + "' ) and isnull(enda,0)=0 and isnull(cancel,0)=0"
-					t_where = t_where + ' and ' + q_sqlPara("custno", t_custno)+" and datea>='"+$('#txtOdate').val()+"'";
+					t_where = t_where + ' and ' + q_sqlPara("custno", t_custno)+" and datea>='"+$('#txtOdate').val()+"' and exists(select noa from view_quat where a.noa=noa and stype='"+$('#cmbStype').val()+"')" ;
 				}else {
 					alert(q_getMsg('msgCustEmp'));
 					return;

@@ -19,13 +19,14 @@ declare @tmp table(
 	img nvarchar(max),
 	total float
 )
-insert into @tmp
-select '0',ROW_NUMBER() over (partition by LEFT(a.productno,7) order by a.product),''
-,a.productno,REPLACE(a.product,'~#$',"'"),b.product,a.spec,b.spec,a.memo,'',a.total
-from view_quats a
-left join ucas b on a.productno = b.noa
-left join ucc c on a.productno = c.noa
-where a.noa = @t_noa
+insert into @tmp 
+select '0',ROW_NUMBER() over (partition by LEFT(a.productno,7) order by a.product),'' 
+,a.productno,REPLACE(a.product,'~#$',"'")+'<br/>'+d.engpro,b.product,a.spec,b.spec,a.memo,'',a.total 
+from view_quats a 
+left join ucas b on a.productno = b.noa 
+left join ucc c on a.productno = c.noa 
+left join uca d on b.noa= d.noa 
+where a.noa = @t_noa 
 
 --製成品原料=8,原料=5
 update @tmp set gno = case when product is not null then '8' else '5' end 
