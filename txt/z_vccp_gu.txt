@@ -26,16 +26,25 @@ declare @tmp table(
 	sono nvarchar(50),
 	goal nvarchar(200)
 )
+--2017/09/22 王先生列印只列印第一筆且件數,重量,材積是出貨總和顯示 另國外客戶電話顯示喬霸電話 
 insert into @tmp
 select '0','',ROW_NUMBER() over (partition by a.noa order by a.noa),a.noa,
-	   b.datea,a.comp,a.tel,b.ordeno,REPLACE(b.product,'~#$','"'),b.mount,b.weight,b.theory,
+	   b.datea,a.comp,case when f.typea='02' then g.tel else a.tel end
+	   ,b.ordeno,REPLACE(b.product,'~#$','"'),b.mount,b.weight,b.theory,
 	   c.deivery_addr,c.cldate,c.bcomp+' '+d.tel,e.main,c.trancomp,c.boatname+'/'+c.ship,c.sono,c.goal
 from view_vcc a
 left join view_vccs b on a.noa=b.noa
 left join boaj c on a.noa = c.noa
 left join tgg d on c.bcompno = d.noa
 left join ucam e on c.markno = e.noa
+left join cust f on a.custno=f.noa
+left join acomp g on a.cno=b.noa
 where (a.noa between @t_bxnoa and @t_exnoa)
+
+update @tmp
+set mount=b.mount,weight=b.weight,theory=b.theory
+from @tmp a
+outer apply(select SUM(mount)mount,SUM(weight)weight,SUM(theory)theory from @tmp where a.noa=noa)b
 
 declare @rec int
 declare @noa nvarchar(20)
@@ -68,7 +77,8 @@ update @tmp set logo = '<img width="160px" src="http://59.125.143.171/images/log
 
 select
 	*,dbo.getComma(mount,0) mnt,dbo.getComma(weight,2) weit
-from @tmp order by noa,gno;
+from @tmp where rec='1' order by noa,gno
+;
 
 --*******************************************************************************
 --*******************************************************************************

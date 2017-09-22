@@ -21,7 +21,9 @@ declare @tmp table(
 )
 insert into @tmp 
 select '0',ROW_NUMBER() over (partition by LEFT(a.productno,7) order by a.product),'' 
-,a.productno,REPLACE(a.product,'~#$',"'")+'<br/>'+d.engpro,b.product,a.spec,b.spec,a.memo,'',a.total 
+,a.productno,
+--REPLACE(a.product,'~#$',"'")2017/09/22 報價單的品名改英文品名
+d.engpro,b.product,a.spec,b.spec,a.memo,'',a.total 
 from view_quats a 
 left join ucas b on a.productno = b.noa 
 left join ucc c on a.productno = c.noa 
