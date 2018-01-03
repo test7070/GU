@@ -32,6 +32,9 @@
 	                    },{
 	                        type : '1', //[2][3]
 	                        name : 'xnoa'
+	                    },{
+	                        type : '1', //[4][5]
+	                        name : 'xdate'
 	                    }]
                     });
                 q_popAssign();
