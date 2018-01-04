@@ -583,3 +583,63 @@ close cursor_table
 deallocate cursor_table
 
 select *,dbo.getComma(price,-1) prc from @tmp order by rec,gno ;
+--******************************************************************************
+z_ordcp_gu04:--z_ordcp_gu04
+declare @t_btggno nvarchar(50)
+declare @t_etggno nvarchar(50)
+declare @t_quatno nvarchar(30)
+declare @t_contract nvarchar(30)
+declare @t_ip nvarchar(50)
+
+set @t_btggno = case when '#non'=[3] then '' else [3] end
+set @t_etggno = case when '#non'=[4] then char(255) else [4] end
+set @t_quatno = case when '#non' = [5] then '' else [5] end
+set @t_contract = case when '#non' = [6] then '' else [6] end
+set @t_ip = case when '#non' = '[7]' then '' else '[7]' end
+declare @tmp table(
+	gno nvarchar(5),
+	noa nvarchar(30),
+	noq nvarchar(5),
+	ordeno nvarchar(30),
+	product nvarchar(300),
+	mount float,
+	tgg nvarchar(30)
+)
+insert into @tmp(gno,noa,noq,ordeno,product,mount,tgg)
+select '0',a.noa,b.no2,a.quatno,b.product,b.mount,a.nick
+from view_ordc a
+left join view_ordcs b on a.noa = b.noa
+where (a.tggno between @t_btggno and @t_etggno) and (a.quatno is not null) and
+	  (LEN(@t_quatno) = 0 or a.quatno = @t_quatno) and (LEN(@t_contract) = 0 or a.contract = @t_contract)
+
+insert into @tmp(gno,noa,tgg)
+select '2',noa,max(tgg)
+from @tmp group by noa
+
+DECLARE MyCursor Cursor FOR 
+select count(1) a,noa from @tmp where gno='0' group by noa 
+Open MyCursor 
+declare @a int 
+declare @b int 
+declare @noa nvarchar(25) 
+declare @i int 
+--開始迴圈跑Cursor Start 
+
+Fetch NEXT FROM MyCursor INTO @a,@noa 
+While (@@FETCH_STATUS <> -1) 
+BEGIN 
+set @i=0 
+set @b=@a 
+while (@i < 9-@a%9 and @a%9!=0) 
+begin 
+set @b=@b+1 
+insert into @tmp (gno,noa,noq) values ('1',@noa,@b) 
+set @i=@i+1 
+end 
+Fetch NEXT FROM MyCursor INTO @a,@noa 
+END
+CLOSE MyCursor 
+DEALLOCATE MyCursor 
+update @tmp set noq= RIGHT('000'+noq,3)
+
+select * from @tmp order by noa,gno;
