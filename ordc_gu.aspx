@@ -248,7 +248,6 @@
 						q_cmbParse("cmbCoin", z_coin);
 						if(abbm[q_recno])
 							$('#cmbCoin').val(abbm[q_recno].coin);
-						
 						break;
 					case 'flors':
 						var as = _q_appendData("flors", "", true);
@@ -377,7 +376,6 @@
 			        }
 				}
 				sum();
-				
 				if ($('#cmbKind').val() == '1') {
 					for (var j = 0; j < q_bbsCount; j++) {
 						$('#txtProductno_' + j).val($('#txtProductno1_' + j).val());

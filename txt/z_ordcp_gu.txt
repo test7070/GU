@@ -1,25 +1,17 @@
 ﻿z_ordcp_gu01:--z_ordcp_gu01
 
-declare @t_btggno nvarchar(50)
-declare @t_etggno nvarchar(50)
-declare @t_quatno nvarchar(30)
-declare @t_contract nvarchar(30)
-declare @t_ip nvarchar(50)
-
-set @t_btggno = case when '#non'=[3] then '' else [3] end
-set @t_etggno = case when '#non'=[4] then char(255) else [4] end
-set @t_quatno = case when '#non' = [5] then '' else [5] end
-set @t_contract = case when '#non' = [6] then '' else [6] end
-set @t_ip = case when '#non' = '[7]' then '' else '[7]' end
+declare @t_btggno nvarchar(50) = case when '#non'=[3] then '' else [3] end
+declare @t_etggno nvarchar(50) = case when '#non'=[4] then char(255) else [4] end
+declare @t_quatno nvarchar(30) = case when '#non' = [5] then '' else [5] end
+declare @t_contract nvarchar(30) = case when '#non' = [6] then '' else [6] end
+declare @t_ip nvarchar(50) = case when '#non' = '[7]' then '' else '[7]' end
 --------------------------------------------------------------------------------
 SET QUOTED_IDENTIFIER OFF
 
 declare @tmp table(
 	gno nvarchar(1),
 	rec int,
-	
 	logo nvarchar(max),
-	
 	tggno nvarchar(50),
 	tgg nvarchar(100),
 	paytype nvarchar(200),
@@ -92,17 +84,11 @@ dbo.getComma(mount,[8])mount
 --******************************************************************************
 z_ordcp_gu02:--z_ordcp_gu02
 
-declare @t_btggno nvarchar(50)
-declare @t_etggno nvarchar(50)
-declare @t_quatno nvarchar(30)
-declare @t_contract nvarchar(30)
-declare @t_ip nvarchar(50)
-
-set @t_btggno = case when '#non'=[3] then '' else [3] end
-set @t_etggno = case when '#non'=[4] then char(255) else [4] end
-set @t_quatno = case when '#non' = [5] then '' else [5] end
-set @t_contract = case when '#non' = [6] then '' else [6] end
-set @t_ip = case when '#non' = '[7]' then '' else '[7]' end
+declare @t_btggno nvarchar(50) = case when '#non'=[3] then '' else [3] end
+declare @t_etggno nvarchar(50) = case when '#non'=[4] then char(255) else [4] end
+declare @t_quatno nvarchar(30) = case when '#non' = [5] then '' else [5] end
+declare @t_contract nvarchar(30) = case when '#non' = [6] then '' else [6] end
+declare @t_ip nvarchar(50) = case when '#non' = '[7]' then '' else '[7]' end
 --------------------------------------------------------------------------------
 SET QUOTED_IDENTIFIER OFF
 
@@ -157,14 +143,14 @@ select DISTINCT '1',mount,quatno,memo,tggno,tgg,datea,products,img1,img2,img3,im
 
 declare @rec int
 declare @quatno nvarchar(30)
-declare @xquatno nvarchar(30)
+declare @xquatno nvarchar(30) = 'xxxxxxxxxx'
 declare @tggno nvarchar(50)
 declare	@tgg nvarchar(50)
-declare	@xtgg nvarchar(50)
+declare	@xtgg nvarchar(50) = 'xxxxxxxxxx'
 declare @products nvarchar(100)
-declare @xproducts nvarchar(100)
+declare @xproducts nvarchar(100) = 'xxxxxxxxxx'
 declare @product nvarchar(100)
-declare @xproduct nvarchar(100)
+declare @xproduct nvarchar(100) = 'xxxxxxxxxx'
 declare @spec nvarchar(50)
 declare @price float
 
@@ -175,11 +161,6 @@ declare @i int
 declare @cnts int
 declare @is int
 declare @str nvarchar(100)
-
-set @xquatno = 'xxxxxxxxxx'
-set @xtgg = 'xxxxxxxxxx'
-set @xproducts = 'xxxxxxxxxx'
-set @xproduct = 'xxxxxxxxxx'
 
 declare cursor_table cursor for 
 select rec,quatno,tggno,tgg,products,product from @tmp where gno = '9'
@@ -328,20 +309,13 @@ from @tmp order by rec,gno ;
 --******************************************************************************
 z_ordcp_gu03:--z_ordcp_gu03
 
-declare @t_btggno nvarchar(50)
-declare @t_etggno nvarchar(50)
-declare @t_quatno nvarchar(30)
-declare @t_contract nvarchar(30)
-declare @t_ip nvarchar(50)
-
-set @t_btggno = case when '#non'=[3] then '' else [3] end
-set @t_etggno = case when '#non'=[4] then char(255) else [4] end
-set @t_quatno = case when '#non' = [5] then '' else [5] end
-set @t_contract = case when '#non' = [6] then '' else [6] end
-set @t_ip = case when '#non' = '[7]' then '' else '[7]' end
+declare @t_btggno nvarchar(50) = case when '#non'=[3] then '' else [3] end
+declare @t_etggno nvarchar(50) = case when '#non'=[4] then char(255) else [4] end
+declare @t_quatno nvarchar(30) = case when '#non' = [5] then '' else [5] end
+declare @t_contract nvarchar(30) = case when '#non' = [6] then '' else [6] end
+declare @t_ip nvarchar(50) = case when '#non' = '[7]' then '' else '[7]' end
 --------------------------------------------------------------------------------
 SET QUOTED_IDENTIFIER OFF
-
 
 declare @tmp table(
 	gno nvarchar(1),
@@ -391,14 +365,14 @@ select DISTINCT '1',mount,quatno,tggno,tgg,datea,products,img1,img2,img3,img4,im
 
 declare @rec int
 declare @quatno nvarchar(30)
-declare @xquatno nvarchar(30)
+declare @xquatno nvarchar(30) = 'xxxxxxxxxx'
 declare @tggno nvarchar(50)
 declare	@tgg nvarchar(50)
-declare	@xtgg nvarchar(50)
+declare	@xtgg nvarchar(50) = 'xxxxxxxxxx'
 declare @products nvarchar(100)
-declare @xproducts nvarchar(100)
+declare @xproducts nvarchar(100) = 'xxxxxxxxxx'
 declare @product nvarchar(100)
-declare @xproduct nvarchar(100)
+declare @xproduct nvarchar(100) = 'xxxxxxxxxx'
 declare @spec nvarchar(50)
 declare @price float
 
@@ -409,11 +383,6 @@ declare @i int
 declare @cnts int
 declare @is int
 declare @str nvarchar(100)
-
-set @xquatno = 'xxxxxxxxxx'
-set @xtgg = 'xxxxxxxxxx'
-set @xproducts = 'xxxxxxxxxx'
-set @xproduct = 'xxxxxxxxxx'
 
 declare cursor_table cursor for 
 select rec,quatno,tggno,tgg,products,product from @tmp where gno = '9'
@@ -517,8 +486,6 @@ end
 close cursor_table 
 deallocate cursor_table
 
- 
- 
 --控制換頁
 set @xquatno = 'xxxxxxxxxx'
 
@@ -618,7 +585,7 @@ declare @a int
 declare @b int 
 declare @noa nvarchar(25) 
 declare @i int 
---開始迴圈跑Cursor Start 
+--開始迴圈跑 Cursor Start 
 
 Fetch NEXT FROM MyCursor INTO @a,@noa 
 While (@@FETCH_STATUS <> -1) 
