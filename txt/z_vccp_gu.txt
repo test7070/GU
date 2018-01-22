@@ -299,29 +299,28 @@ select
 	,case when isnull(weight,'')='' then '' else '@' end at
 	,case when isnull(weight,'')='' then '' else no2 end no2
 from @tmp order by ordeno,dbo.split(no2,'-',0),productno,gno ;
-
-
-
 --*******************************************************************************
 --*******************************************************************************
 --*******************************************************************************
 z_vccp_gu04:--z_vccp_gu04 ---併貨通知單
-declare @t_bxdate nvarchar(20) = case when '#non' = [2] then '' else [2] end
-declare @t_exdate nvarchar(20) = case when '#non' = [3] then CHAR(255) else [3] end
+--declare @t_bxdate nvarchar(20) = case when '#non' = [2] then '' else [2] end
+--declare @t_exdate nvarchar(20) = case when '#non' = [3] then CHAR(255) else [3] end
+declare @t_bxdate nvarchar(20) = '2017/12/21'
+declare @t_exdate nvarchar(20) = '2017/12/21'
 declare @tmp table(
 	gno nvarchar(1),
 	logo nvarchar(100),
 	rec int,
-	ordeno nvarchar(90),
-	product nvarchar(200)
+	product nvarchar(200),--產品名稱
+	--mount float, ---數量
+	--ordeno nvarchar(90),--訂單編號
+	ordeno nvarchar(90)
+	--custno nvarchar(100)
 )
-
 insert into @tmp
-select '9',ROW_NUMBER() over (order by a.ordeno,a.productno),a.ordeno,a.product
-from view_vccs a
-where (a.datea between @t_bxdate and @t_exdate)
+select '0',ROW_NUMBER() over (order by a.ordeno,a.productno),a.ordeno,a.product
+from view_vccs a where (a.datea between @t_bxdate and @t_exdate)
 ;
-
 --*******************************************************************************
 --*******************************************************************************
 --*******************************************************************************
