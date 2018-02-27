@@ -879,7 +879,7 @@
 			}
 			.dview {
 				float: left;
-				width: 30%;
+				width: 377px;
 				border-width: 0px;
 			}
 			.tview {
@@ -889,7 +889,7 @@
 				background-color: black;
 			}
 			.tview tr {
-				height: 30px;
+				height: 32px;
 			}
 			.tview td {
 				padding: 2px;
@@ -1009,26 +1009,19 @@
 				</tr>
 			</table>
 		</div>
-		
 		<div id="div_addr2" style="position:absolute; top:244px; left:500px; display:none; width:530px; background-color: #CDFFCE; border: 5px solid gray;">
 			<table id="table_addr2" style="width:100%;" border="1" cellpadding='2' cellspacing='0'>
 				<tr>
-					<td style="width:30px;background-color: #f8d463;" align="center">
-						<input class="btn addr2" id="btnAddr_plus" type="button" value='＋' style="width: 30px" />
-					</td>
+					<td style="width:30px;background-color: #f8d463;" align="center"><input class="btn addr2" id="btnAddr_plus" type="button" value='＋'/></td>
 					<td style="width:70px;background-color: #f8d463;" align="center">郵遞區號</td>
 					<td style="width:430px;background-color: #f8d463;" align="center">指送地址</td>
 				</tr>
-				<tr id='addr2_close'>
-					<td align="center" colspan='3'>
-						<input id="btnClose_div_addr2" type="button" value="確定">
-					</td>
-				</tr>
+				<tr id='addr2_close'><td align="center" colspan='3'><input id="btnClose_div_addr2" type="button" value="確定"></td></tr>
 			</table>
 		</div>
-		<div id='dmain' style="overflow:hidden;width: 1260px;">
-			<div class="dview" id="dview">
-				<table class="tview" id="tview">
+		<div id='dmain' style="overflow:hidden;width: 1450px;"><!---1260px--->
+			<div class="dview" id="dview" >
+				<table class="tview" id="tview" style="height: 100%;">
 					<tr>
 						<td align="center" style="width:5%"><a id='vewChk'> </a></td>
 						<td align="center" style="width:25%"><a id='vewOdate'> </a></td>
@@ -1036,7 +1029,7 @@
 						<td align="center" style="width:40%"><a id='vewComp'> </a></td>
 					</tr>
 					<tr>
-						<td><input id="chkBrow.*" type="checkbox" style=''/></td>
+						<td><input id="chkBrow.*" type="checkbox"/></td>
 						<td align="center" id='odate'>~odate</td>
 						<td align="center" id='noa'>~noa</td>
 						<td align="center" id='custno comp,4'>~custno ~comp,4</td>
@@ -1044,16 +1037,16 @@
 				</table>
 			</div>
 			<div class='dbbm'>
-				<table class="tbbm" id="tbbm" style="width: 872px;">
-					<tr style="height: 0px">
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"> </td>
+				<table class="tbbm" id="tbbm" style="width: 1073px;" border="0">
+					<tr style="height: 0px;">
+						<td style="width: 150px;"> </td>
+						<td style="width: 75px;"> </td>
+						<td style="width: 70px;"> </td>
+						<td style="width: 100px;"> </td>
+						<td style="width: 135px;"> </td>
+						<td style="width: 90px;"> </td>
+						<td style="width: 145px;"> </td>
+						<td style="width: 75px;"> </td>
 					</tr>
 					<tr>
 						<td><span> </span><a id='lblOdate' class="lbl"> </a></td>
@@ -1156,9 +1149,7 @@
 					</tr>
 					<tr>
 						<td><span> </span><a id='lblMemo' class='lbl'> </a></td>
-						<td colspan='7'>
-							<textarea id="txtMemo" cols="10" rows="5" style="width: 99%;height: 50px;"> </textarea>
-						</td>
+						<td colspan='7'><textarea id="txtMemo" cols="10" rows="5" style="width: 99%;height:50px;"> </textarea></td>
 					</tr>
 				</table>
 			</div>
@@ -1166,31 +1157,27 @@
 		<div class='dbbs' style="width: 1600px;">
 			<table id="tbbs" class='tbbs' border="1" cellpadding='2' cellspacing='1'>
 				<tr style='color:White; background:#003366;' >
-					<td align="center" style="width:45px;">
-						<input class="btn" id="btnPlus" type="button" value='＋' style="font-weight: bold;" />
-					</td>
-					<td align="center" style="width:160px;"><a id='lblProductno'> </a></td>
+					<td align="center" style="width:20px;"><input class="btn" id="btnPlus" type="button" value='＋' style="font-weight: bold;" /></td>
+					<td align="center" style="width:150px;"><a id='lblProductno'> </a></td>
 					<td align="center" style="width:200px;"><a id='lblProduct_s'> </a></td>
 					<td align="center" style="width:95px;" class="isStyle"><a id='lblStyle'> </a></td>
 					<td align="center" style="width:55px;"><a id='lblUnit'> </a></td>
-					<td align="center" style="width:85px;"><a id='lblMount'> </a></td>
-					<td align="center" style="width:85px;"><a id='lblPrices'> </a></td>
-					<td align="center" style="width:115px;"><a id='lblTotal_s'> </a></td>
-					<td align="center" style="width:85px;"><a id='lblGemounts'> </a></td>
+					<td align="center" style="width:80px;"><a id='lblMount'> </a></td>
+					<td align="center" style="width:80px;"><a id='lblPrices'> </a></td>
+					<td align="center" style="width:80px;"><a id='lblTotal_s'> </a></td>
+					<td align="center" style="width:80px;"><a id='lblGemounts'> </a></td>
 					<td align="center" style="width:175px;"><a id='lblMemos'> </a></td>
-					<td align="center" style="width:85px;"><a id='lblDateas'> </a></td>
-					<td align="center" style="width:43px;"><a id='lblEndas'> </a></td>
-					<td align="center" style="width:43px;"><a id='lblCancels'> </a></td>
-					<td align="center" style="width:43px;"><a id='lblBorn'> </a></td>
+					<td align="center" style="width:80px;"><a id='lblDateas'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblEndas'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblCancels'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblBorn'> </a></td>
 					<!--<td align="center" style="width:43px;"><a id='lblNeed'> </a></td>-->
-					<td align="center" style="width:43px;"><a id='lblVccrecord'> </a></td>
-					<td align="center" style="width:43px;"><a id='lblOrdemount'> </a></td>
-					<td align="center" style="width:43px;"><a id='lblScheduled'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblVccrecord'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblOrdemount'> </a></td>
+					<td align="center" style="width:40px;"><a id='lblScheduled'> </a></td>
 				</tr>
 				<tr style='background:#cad3ff;'>
-					<td>
-						<input class="btn" id="btnMinus.*" type="button" value='－' style=" font-weight: bold;" />
-					</td>
+					<td><input class="btn" id="btnMinus.*" type="button" value='－' style=" font-weight: bold;" /></td>
 					<td align="center">
 						<input class="txt c6" id="txtProductno.*" maxlength='30'type="text" style="width:98%;" />
 						<input class="btn" id="btnProduct.*" type="button" value='.' style=" font-weight: bold;" />
@@ -1225,7 +1212,6 @@
 					<td align="center"><input class="btn" id="btnScheduled.*" type="button" value='.' style=" font-weight: bold;" /></td>
 				</tr>
 			</table>
-		</div>
-		<input id="q_sys" type="hidden" />
+		</div><input id="q_sys" type="hidden" />
 	</body>
 </html>

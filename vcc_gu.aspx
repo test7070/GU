@@ -28,7 +28,7 @@
 			var bbsMask = [];
 			q_sqlCount = 6;
 			brwCount = 6;
-			brwCount2 = 12;
+			brwCount2 = 13;
 			brwList = [];
 			brwNowPage = 0;
 			brwKey = 'datea';
@@ -111,6 +111,7 @@
 				, ['txtWeight', 15, q_getPara('weight.mountPrecision'), 1], ['txtTheory', 10, q_getPara('vcc.mountPrecision'), 1], ['txtTotal', 15, 0, 1]];
 				q_cmbParse("cmbTranstyle", q_getPara('sys.transtyle'));
 				q_cmbParse("cmbTypea", q_getPara('vcc.typea'));
+				//q_cmbParse("cmbStype", ('').concat(new Array('外銷','內銷','代工','樣品')));
 				q_cmbParse("cmbStype", q_getPara('vcc.stype'));
 				//q_cmbParse("cmbTaxtype", q_getPara('sys.taxtype'));
 				//q_cmbParse("cmbCoin", q_getPara('sys.coin'));
@@ -265,8 +266,6 @@
 						q_box("boaj_gu.aspx?" + r_userno + ";" + r_name + ";" + q_time + ";" + t_where, 'boaj', "95%", "95%", q_getMsg('btnBoaj'));
 					}
 				});
-				
-				$('#btnBoaj').val('船務資料');
 					
 				if (q_getPara('sys.menu').substr(0,3)!='qra'){
 					$('#lblTranadd').hide()
@@ -933,8 +932,14 @@
 				$('#txtAcomp').val(z_acomp);
 				$('#txtDatea').val(q_date());
 				$('#cmbTypea').val('1');
+				$('#cmbStype').val('3');
+				$('#cmbCoin').val('USD');
 				$('#txtDatea').focus();
 				//$('#cmbTaxtype').val('1');
+				var t_date = new Date();
+				var t_year = t_date.getFullYear();
+				var t_month = t_date.getMonth()+1;
+				$('#txtMon').val(t_year+'/'+(t_month<10?'0':'')+t_month);
 				var t_where = "where=^^ 1=0 ^^ stop=100";
 				q_gt('custaddr', t_where, 0, 0, 0, "");
 			}
@@ -1282,11 +1287,11 @@
 			<table id="table_stk" style="width:100%;" border="1" cellpadding='2'  cellspacing='0'>
 				<tr>
 					<td style="background-color: #f8d463;" align="center">產品編號</td>
-					<td style="background-color: #f8d463;" colspan="2" id='stk_productno'> </td>
+					<td style="background-color: #f8d463;" colspan="2" id='stk_productno'></td>
 				</tr>
 				<tr>
 					<td style="background-color: #f8d463;" align="center">產品名稱</td>
-					<td style="background-color: #f8d463;" colspan="2" id='stk_product'> </td>
+					<td style="background-color: #f8d463;" colspan="2" id='stk_product'></td>
 				</tr>
 				<tr id='stk_top'>
 					<td align="center" style="width: 30%;">倉庫編號</td>
@@ -1300,9 +1305,8 @@
 				</tr>
 			</table>
 		</div>
-		<div id="dmain" style="width: 1260px;">
-			<!--#include file="../inc/toolbar.inc"-->
-			<div class="dview" id="dview" >
+		<div id="dmain" style="width: 1380px;"><!--#include file="../inc/toolbar.inc"-->
+			<div class="dview" id="dview" style="width: 388px;">
 				<table class="tview" id="tview">
 					<tr>
 						<td align="center" style="width:5%"><a id='vewChk'> </a></td>
@@ -1321,20 +1325,19 @@
 				</table>
 			</div>
 			<div class='dbbm'>
-				<table class="tbbm"  id="tbbm" style="width: 872px;">
+				<table class="tbbm" id="tbbm" style="width:990px;">
 					<tr>
-						<td style="width: 108px;"><span> </span><a id='lblType' class="lbl"> </a></td>
-						<td style="width: 108px;"><select id="cmbTypea"> </select></td>
-						<td style="width: 108px;">
-							<a id='lblStype' class="lbl" style="float: left;"> </a>
-							<span style="float: left;"> </span>
-							<select id="cmbStype"> </select>
+						<td style="width: 145px;"><span> </span><a id='lblType' class="lbl"></a></td>
+						<td style="width: 50px;"><select id="cmbTypea"></select></td>
+						<td style="width: 90px;">
+							<a id="lblStype" class="lbl" style="float: left;"></a>
+							<span style="float:left;"></span><select id="cmbStype"></select>
 						</td>
-						<td style="width: 108px;"><span> </span><a id='lblDatea' class="lbl"> </a></td>
-						<td style="width: 108px;"><input id="txtDatea" type="text"  class="txt c1"/></td>
-						<td style="width: 108px;"> </td>
-						<td style="width: 108px;"><span> </span><a id='lblNoa' class="lbl"> </a></td>
-						<td style="width: 108px;"><input id="txtNoa" type="text" class="txt c1" /></td>
+						<td style="width: 120px;"><span> </span><a id='lblDatea' class="lbl"> </a></td>
+						<td style="width: 50px;"><input id="txtDatea" type="text"  class="txt c1"/></td>
+						<td style="width: 60px;"></td>
+						<td style="width: 60px;"><span> </span><a id='lblNoa' class="lbl"> </a></td>
+						<td style="width: 100px;"><input id="txtNoa" type="text" class="txt c1" /></td>
 					</tr>
 					<tr>
 						<td><span> </span><a id="lblAcomp" class="lbl btn"> </a></td>
@@ -1443,12 +1446,12 @@
 					</tr>
 					<tr>
 						<td><span> </span><a id="lblMemo" class="lbl"> </a></td>
-						<td colspan='7'><textarea id="txtMemo" cols="10" rows="5" style="width: 99%;height: 50px;"> </textarea></td>
+						<td colspan='7'><textarea id="txtMemo" cols="10" rows="5" style="width: 99%;height: 60px;"> </textarea></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		<div class='dbbs' style="width: 1260px;">
+		<div class='dbbs' style="width: 1380px;">
 			<table id="tbbs" class='tbbs'>
 				<tr style='color:White; background:#003366;' >
 					<td align="center" style="width:40px;">
@@ -1457,7 +1460,7 @@
 					<!--<td align="center" style="width:180px"><a id='lblProductno_s'> </a></td> 
 					vcc只算出貨金額不扣料，依據packing轉get領料	
 					-->
-					<td align="center" style="width:250px;"><a id='lblProduct_s'> </a></td>
+					<td align="center" style="width:300px;"><a id='lblProduct_s'> </a></td>
 					<td align="center" style="width:95px;" class="isStyle"><a id='lblStyle_s'> </a></td>
 					<td align="center" style="width:40px;"><a id='lblUnit_s'> </a></td>
 					<td align="center" style="width:100px;"><a id='lblMount_s'> </a></td>
